@@ -1,6 +1,15 @@
-from flask import Flask, request, jsonify, render_template
+from flask import jsonify
+import google.generativeai as genai
 from constants import gift_categories
-from constants import model
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+api_key = os.getenv('GOOGLE_API_KEY')
+
+genai.configure(api_key=api_key)
+model = genai.GenerativeModel('gemini-1.5-flash')
+
 
 
 conversation_history = []
@@ -8,6 +17,7 @@ conversation_history = []
 
 
 #Handling the prompt
+
 
 def handle_prompt(prompt):
     global conversation_history

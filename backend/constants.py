@@ -9,4 +9,14 @@ gift_categories = {
     "Adventurous Seeker": ["Camping Gear", "Action Camera", "Hiking Backpack", "Travel Voucher", "Adventure Book"],
 }
 
+category_questions = {
+        "Artistic Thinker": ['Q1', 'Q2', 'Q3', 'Q4', 'Q5'],
+        "Logical Analyst": ['Q6', 'Q7', 'Q8', 'Q9', 'Q10'],
+        "Creative Explorer": ['Q11', 'Q12', 'Q13', 'Q14', 'Q15'],
+        "Balanced Harmonizer": ['Q16', 'Q17', 'Q18', 'Q19', 'Q20'],
+        "Adventurous Seeker": ['Q21', 'Q22', 'Q23', 'Q24', 'Q25']
+}
+
+api_key = os.getenv('GOOGLE_API_KEY')
+
 
