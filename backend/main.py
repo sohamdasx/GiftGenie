@@ -17,7 +17,7 @@ app = Flask(__name__)
 #ChatBot Routes
 @app.route('/chatbot', methods=['POST'])
 def chat():
-    return mainChatBot(request.json['message'])
+    return mainChatBot(request.json['message']),200
 
 
 
@@ -27,7 +27,7 @@ def recommend():
     try:
         data = request.json
         responses = [data[f'Q{i+1}'] for i in range(25)]
-        return jsonify(recommendGifts(responses))
+        return jsonify(recommendGifts(responses)),200
         
 
         
