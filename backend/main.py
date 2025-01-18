@@ -27,6 +27,7 @@ def recommend():
     try:
         data = request.json
         responses = [data[f'Q{i+1}'] for i in range(25)]
+        return jsonify(recommendGifts(responses))
         
 
         

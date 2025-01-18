@@ -32,11 +32,35 @@ def recommendGifts(responses):
             gift_scores.append((gift, gift_score))
 
     ranked_gifts = sorted(gift_scores, key=lambda x: x[1], reverse=True)
+    arr = sorted(normalized_scores.items(), key=lambda x: x[1], reverse=True)
+    print(arr)
+    profileJSON = {}
+    for category, score in arr:
+        profileJSON[category] = round(score, 2)
 
-    finalJSON = []
-
+    recommendationJSON = {}
     for gift, score in ranked_gifts:
-        finalJSON.append((gift, score))
+        recommendationJSON[gift] = score
+        
+
+    # for category, score in arr:
+    #     recommendationJSON.append({
+    #         "category": category,
+    #         "score": score
+    #     })
+
+    finalJSON = {
+        "profile": profileJSON,
+        "recommendation": recommendationJSON
+    }
+    
+
+    
+
+    
+    
+    
+    # print(arr)
 
 
     return finalJSON
