@@ -61,15 +61,23 @@ const questions = [
 
 const Survey = () => {
   const [answers, setAnswers] = useState(
-    Array(questions.length).fill(Array(5).fill(null))
+    Array(questions.length)
+      .fill(null)
+      .map(() => Array(5).fill(null))
   );
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [currentItem, setCurrentItem] = useState(0);
   const navigate = useNavigate();
 
   const handleAnswer = (answer) => {
-    const newAnswers = [...answers];
-    newAnswers[currentQuestion][currentItem] = answer;
+    const newAnswers = answers.map((arr, qIndex) => {
+      if (qIndex === currentQuestion) {
+        const newArr = [...arr];
+        newArr[currentItem] = answer;
+        return newArr;
+      }
+      return [...arr];
+    });
     setAnswers(newAnswers);
 
     if (currentItem < questions[currentQuestion].items.length - 1) {
@@ -78,18 +86,11 @@ const Survey = () => {
       setCurrentQuestion(currentQuestion + 1);
       setCurrentItem(0);
     } else {
-      // Send answers to backend
-      const flatAnswers = answers.flat();
-      console.log(flatAnswers);
-      //   fetch("http://localhost:5000/api/survey", {
-      //     method: "POST",
-      //     headers: {
-      //       "Content-Type": "application/json",
-      //     },
-      //     body: JSON.stringify({ answers: newAnswers }),
-      //   }).then((response) => response.json())
-      //     .then(() => navigate("/recommendations"));
-      fetch("/sex", {
+      // Create the flat answers array for submission
+      const flatAnswers = newAnswers.flat();
+      console.log(flatAnswers.map((value, index) => [`Q${index + 1}`, value]));
+
+      fetch("/recommend", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -107,6 +108,7 @@ const Survey = () => {
         })
         .catch((error) => {
           console.error("Error sending survey results:", error);
+          // You might want to show an error message to the user here
         });
     }
   };
