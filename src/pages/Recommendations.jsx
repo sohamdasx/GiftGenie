@@ -49,7 +49,7 @@ const Recommendations = () => {
       })
       .sort((a, b) => b.score - a.score);
   }, [data.recommendation]);
-  
+
   const handleAddToCart = (item) => {
     setCart([...cart, { ...item, id: Date.now() }]);
   };

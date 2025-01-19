@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-// import ProductItem from "./components/ProductItem";
+import ProductItem from "../components/ProductItem"; // Fix the import path as discussed earlier
 
 export default function Products() {
   const [products, setProducts] = useState([]);
@@ -9,12 +9,25 @@ export default function Products() {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await fetch("http://localhost:5000/api/products");
+        const response = await fetch(
+          "https://devfest-25-hackathon-1.onrender.com/getGifts"
+        );
         if (!response.ok) {
           throw new Error("Network response was not ok");
         }
         const data = await response.json();
-        setProducts(data);
+
+        // Transform the data into the format we need
+        const transformedProducts = Object.entries(data.gifts).map(
+          ([name, price]) => ({
+            _id: name, // Using name as ID since there's no explicit ID in the data
+            name: name.replace(/([A-Z])/g, " $1").trim(), // Convert camelCase to spaces
+            price: price,
+            description: data.desc[name],
+          })
+        );
+
+        setProducts(transformedProducts);
       } catch (error) {
         setError(error.message);
       } finally {
@@ -40,9 +53,9 @@ export default function Products() {
           <ProductItem
             key={item._id}
             id={item._id}
-            image={item.image}
             name={item.name}
             price={item.price}
+            description={item.description}
           />
         ))}
       </div>

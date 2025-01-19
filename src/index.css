@@ -4,6 +4,11 @@
 @tailwind components;
 @tailwind utilities;
 
+*{
+  overflow: hidden;
+  overflow-y: auto;
+}
+
 h1,
 input {
   font-family: "Playfair Display", serif;
