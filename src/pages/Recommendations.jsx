@@ -49,7 +49,7 @@ const Recommendations = () => {
       })
       .sort((a, b) => b.score - a.score);
   }, [data.recommendation]);
-
+  
   const handleAddToCart = (item) => {
     setCart([...cart, { ...item, id: Date.now() }]);
   };
@@ -103,11 +103,11 @@ const Recommendations = () => {
         {/* Cart Icon */}
         <button
           onClick={() => setShowCart(true)}
-          className="fixed bottom-4 right-4 bg-white p-3 rounded-full shadow-lg"
+          className="fixed bottom-4 right-4 bg-white p-3 rounded-full shadow-lg z-10"
         >
           <ShoppingCart color="#ca8e83" className="h-6 w-6" />
           {cart.length > 0 && (
-            <span className="absolute -top-2 -right-2 bg-pink text-white rounded-full w-6 h-6 flex items-center justify-center text-sm">
+            <span className="absolute -top-2 -right-2 bg-pink text-white rounded-full w-6 h-6 flex items-center justify-center text-sm z-20">
               {cart.length}
             </span>
           )}
