@@ -97,7 +97,7 @@ const Survey = () => {
           // Add any authentication headers if required
         },
         mode: "cors", // explicitly state CORS mode
-        credentials: "include", // include credentials if needed
+        // credentials: "true", // include credentials if needed
         body: JSON.stringify(
           Object.fromEntries(
             flatAnswers.map((value, index) => [`Q${index + 1}`, value])
@@ -149,7 +149,7 @@ const Survey = () => {
       <button
         onClick={handlePrevious}
         disabled={currentQuestion === 0 && currentItem === 0}
-        className="absolute bottom-6 md:bottom-10 px-4 py-2 rounded"
+        className="absolute bottom-6 md:bottom-10 px-4 py-2 rounded slide-up"
       >
         &larr; Previous
       </button>

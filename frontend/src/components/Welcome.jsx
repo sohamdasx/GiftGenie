@@ -35,7 +35,7 @@ const Welcome = () => {
       </button>
       <button
         onClick={handleViewProducts}
-        className="absolute bottom-12 p-2 rounded-md slide-down"
+        className="absolute bottom-12 p-2 rounded-md slide-up"
       >
         View All Products &#8594;
       </button>

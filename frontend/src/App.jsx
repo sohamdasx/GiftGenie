@@ -2,7 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Welcome from "./components/Welcome";
 import Survey from "./components/Survey";
-import Recommendations from "./components/Recommendations";
+import Recommendations from "./pages/Recommendations";
 import Products from "./pages/Products";
 import Navbar from "./components/Navbar";
 
