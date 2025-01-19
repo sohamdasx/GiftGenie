@@ -47,8 +47,8 @@ export default function Products() {
   }
 
   return (
-    <div className="w-screen h-screen bg-tan text-copper p-8">
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 gap-y-6">
+    <div className="w-screen bg-tan text-copper p-8">
+      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 gap-y-6">
         {products.map((item) => (
           <ProductItem
             key={item._id}
