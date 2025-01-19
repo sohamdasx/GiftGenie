@@ -2,7 +2,7 @@
 # More GitHub Actions for Azure: https://github.com/Azure/actions
 # More info on Python, GitHub Actions, and Azure App Service: https://aka.ms/python-webapps-actions
 
-name: Build and deploy Python app to Azure Web App - devfest-hackathon
+name: Build and deploy Python app to Azure Web App - arjav1528
 
 on:
   push:
@@ -65,14 +65,14 @@ jobs:
       - name: Login to Azure
         uses: azure/login@v2
         with:
-          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_C0C705F1254F453B87376F17D54958B5 }}
-          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_ABC1E1D511784152BB4A2F9D12ACDA4E }}
-          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_194E80B3841C499AB0DE8E7552A102E7 }}
+          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_7BA6CC142A8E46D982B260497650D872 }}
+          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_27D5EA155742456A8E37BF55AC33367A }}
+          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_4831AD1EA8ED434E850F67C19A28FFF5 }}
 
       - name: 'Deploy to Azure Web App'
         uses: azure/webapps-deploy@v3
         id: deploy-to-webapp
         with:
-          app-name: 'devfest-hackathon'
+          app-name: 'arjav1528'
           slot-name: 'Production'
           
