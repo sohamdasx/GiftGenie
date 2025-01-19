@@ -61,15 +61,23 @@ const questions = [
 
 const Survey = () => {
   const [answers, setAnswers] = useState(
-    Array(questions.length).fill(Array(5).fill(null))
+    Array(questions.length)
+      .fill(null)
+      .map(() => Array(5).fill(null))
   );
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [currentItem, setCurrentItem] = useState(0);
   const navigate = useNavigate();
 
   const handleAnswer = (answer) => {
-    const newAnswers = [...answers];
-    newAnswers[currentQuestion][currentItem] = answer;
+    const newAnswers = answers.map((arr, qIndex) => {
+      if (qIndex === currentQuestion) {
+        const newArr = [...arr];
+        newArr[currentItem] = answer;
+        return newArr;
+      }
+      return [...arr];
+    });
     setAnswers(newAnswers);
 
     if (currentItem < questions[currentQuestion].items.length - 1) {
@@ -78,33 +86,56 @@ const Survey = () => {
       setCurrentQuestion(currentQuestion + 1);
       setCurrentItem(0);
     } else {
-      // Send answers to backend
-      console.log(newAnswers);
-      //   fetch("http://localhost:5000/api/survey", {
-      //     method: "POST",
-      //     headers: {
-      //       "Content-Type": "application/json",
-      //     },
-      //     body: JSON.stringify({ answers: newAnswers }),
-      //   }).then((response) => response.json())
-      //     .then(() => navigate("/recommendations"));
+      // Create the flat answers array for submission
+      const flatAnswers = newAnswers.flat();
+      console.log(flatAnswers.map((value, index) => [`Q${index + 1}`, value]));
+
+      fetch("/recommend", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(
+          Object.fromEntries(
+            flatAnswers.map((value, index) => [`Q${index + 1}`, value])
+          )
+        ),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          // Navigate to recommendations page with the data
+          navigate("/recommendations", { state: { recommendations: data } });
+        })
+        .catch((error) => {
+          console.error("Error sending survey results:", error);
+          // You might want to show an error message to the user here
+        });
+    }
+  };
+
+  const handlePrevious = () => {
+    if (currentItem > 0) {
+      setCurrentItem(currentItem - 1);
+    } else if (currentQuestion > 0) {
+      setCurrentQuestion(currentQuestion - 1);
+      setCurrentItem(questions[currentQuestion - 1].items.length - 1);
     }
   };
 
   return (
     <div className="flex flex-col items-center justify-center h-screen bg-tan text-copper">
-      <h1 className="text-4xl mb-5 font-semibold">
+      <h1 className="text-3xl md:text-4xl mb-5 text-center font-semibold fade-in">
         {questions[currentQuestion].category}
       </h1>
-      <h3 className="text-xl p-2 mb-5">
+      <h3 className="text-base sm:text-lg md:text-xl p-2 mb-5 text-center w-screen sm:w-[80%] fade-in">
         {questions[currentQuestion].items[currentItem]}
       </h3>
-      <div className="flex flex-col">
+      <div className="flex flex-col fade-in">
         {questions[currentQuestion].options.map((option, index) => (
           <button
             key={index}
             onClick={() => handleAnswer(index + 1)}
-            className="px-8 py-2 mb-3 rounded"
+            className="px-8 py-2 mb-3 rounded fade-in"
           >
             {option}
           </button>
@@ -113,6 +144,13 @@ const Survey = () => {
       <p className="mt-5">
         Question {currentItem + 1} of {questions[currentQuestion].items.length}
       </p>
+      <button
+        onClick={handlePrevious}
+        disabled={currentQuestion === 0 && currentItem === 0}
+        className="absolute bottom-6 md:bottom-10 px-4 py-2 rounded"
+      >
+        &larr; Previous
+      </button>
     </div>
   );
 };

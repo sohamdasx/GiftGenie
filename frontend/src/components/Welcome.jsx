@@ -7,22 +7,25 @@ const Welcome = () => {
 
   const handleEnter = () => {
     if (username) {
+      console.log(username);
       navigate("/survey");
     }
   };
   const handleViewProducts = () => {
-    navigate("/products");
+    navigate("/products");  
   };
 
   return (
     <div className="flex flex-col items-center justify-center h-screen w-screen text-copper bg-tan">
-      <h1 className="absolute top-32 text-xl sm:text-xl md:text-4xl lg:text-5xl xl:text-6xl p-4">Welcome to Gift Recommendation AI</h1>
+      <h1 className="absolute top-28 sm:top-32 text-3xl md:text-4xl lg:text-5xl xl:text-6xl text-center px-4 sm:px-8 py-4 fade-in">
+        Welcome to Gift Recommendation AI
+      </h1>
       <input
         type="text"
         placeholder="Enter your name"
         value={username}
         onChange={(e) => setUsername(e.target.value)}
-        className="border p-2 mb-6 active:border-none"
+        className="border p-2 mb-8 fade-in"
       />
       <button
         onClick={handleEnter}
@@ -32,7 +35,7 @@ const Welcome = () => {
       </button>
       <button
         onClick={handleViewProducts}
-        className="absolute bottom-12 p-2 rounded"
+        className="absolute bottom-12 p-2 rounded  slide-down"
       >
         View All Products &#8594;
       </button>

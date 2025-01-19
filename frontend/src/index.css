@@ -1,18 +1,47 @@
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap");
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-h1, input {
-    font-family: 'Playfair Display', serif;
+h1,
+input {
+  font-family: "Playfair Display", serif;
 }
 
 button {
-    background-color: #CA8E83;
-    color: white;
+  background-color: #ca8e83;
+  color: white;
 }
 
 button:active {
-    background-color: #A75F37;
+  background-color: #a75f37;
+}
+
+.slide-down {
+  animation: slideDown 1s ease-out;
+}
+
+.fade-in {
+  animation: fadeIn 1.25s ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
