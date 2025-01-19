@@ -15,7 +15,7 @@ app = Flask(__name__)
 CORS(app)
 CORS(app, resources={
     r"/*": {  # Apply to all endpoints
-        "origins": "http://10.70.37.143:5173",  # Allow all origins
+        "origins": "https://devfest-25-hackathon.vercel.app",  # Allow all origins
         "methods": ["GET", "POST", "OPTIONS"],  # Allow common methods
         "allow_headers": ["Content-Type", "Authorization"],  # Allow common headers
         "supports_credentials" : True  # Allow cookies
