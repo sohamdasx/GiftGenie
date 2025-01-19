@@ -25,17 +25,17 @@ const Welcome = () => {
         placeholder="Enter your name"
         value={username}
         onChange={(e) => setUsername(e.target.value)}
-        className="border p-2 mb-8 fade-in"
+        className="border p-2 mb-8 rounded-md fade-in"
       />
       <button
         onClick={handleEnter}
-        className="bg-pink h-auto rounded px-8 py-3 text-sm"
+        className="bg-pink h-auto px-8 py-3 text-sm font-medium rounded-lg"
       >
-        Enter
+        Start survey
       </button>
       <button
         onClick={handleViewProducts}
-        className="absolute bottom-12 p-2 rounded  slide-down"
+        className="absolute bottom-12 p-2 rounded-md slide-down"
       >
         View All Products &#8594;
       </button>

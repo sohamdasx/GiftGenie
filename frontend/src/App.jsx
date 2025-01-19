@@ -4,10 +4,12 @@ import Welcome from "./components/Welcome";
 import Survey from "./components/Survey";
 import Recommendations from "./components/Recommendations";
 import Products from "./pages/Products";
+import Navbar from "./components/Navbar";
 
 function App() {
   return (
     <Router>
+      <Navbar />
       <Routes>
         <Route path="/" element={<Welcome />} />
         <Route path="/products" element={<Products />} />

@@ -90,11 +90,14 @@ const Survey = () => {
       const flatAnswers = newAnswers.flat();
       console.log(flatAnswers.map((value, index) => [`Q${index + 1}`, value]));
 
-      fetch("/recommend", {
+      fetch("https://devfest-25-hackathon-1.onrender.com/recommend", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          // Add any authentication headers if required
         },
+        mode: "cors", // explicitly state CORS mode
+        credentials: "include", // include credentials if needed
         body: JSON.stringify(
           Object.fromEntries(
             flatAnswers.map((value, index) => [`Q${index + 1}`, value])
@@ -103,12 +106,11 @@ const Survey = () => {
       })
         .then((response) => response.json())
         .then((data) => {
-          // Navigate to recommendations page with the data
           navigate("/recommendations", { state: { recommendations: data } });
         })
         .catch((error) => {
           console.error("Error sending survey results:", error);
-          // You might want to show an error message to the user here
+          // Add user-friendly error handling here
         });
     }
   };
