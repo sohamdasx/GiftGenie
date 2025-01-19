@@ -6,7 +6,7 @@ from chatbot import mainChatBot
 from recommendation import recommendGifts
 
 model = genai.GenerativeModel('gemini-1.5-flash')
-api_key = os.getenv('GOOGLE_API_KEY')
+api_key = os.getenv('GAIzaSyA5KBLVRgHH14RISOsnrZKZsZwW76cLiF8')
 genai.configure(api_key=api_key)
 model = genai.GenerativeModel('gemini-1.5-flash')
 app = Flask(__name__)
