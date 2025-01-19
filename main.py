@@ -15,6 +15,11 @@ app = Flask(__name__)
 
 
 #ChatBot Routes
+
+@app.route('/')
+def index():
+    return "Hello World"
+
 @app.route('/chatbot', methods=['POST'])
 def chat():
     try : 
