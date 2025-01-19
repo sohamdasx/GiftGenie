@@ -29,7 +29,7 @@ const Welcome = () => {
       />
       <button
         onClick={handleEnter}
-        className="bg-pink h-auto px-8 py-3 text-sm font-medium rounded-lg"
+        className="bg-pink h-auto px-8 py-3 text-sm font-medium rounded-lg z-20"
       >
         Start survey
       </button>
