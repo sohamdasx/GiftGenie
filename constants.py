@@ -17,6 +17,6 @@ category_questions = {
         "Adventurous Seeker": ['Q21', 'Q22', 'Q23', 'Q24', 'Q25']
 }
 
-api_key = os.getenv('GOOGLE_API_KEY')
+api_key = os.getenv('AIzaSyA5KBLVRgHH14RISOsnrZKZsZwW76cLiF8')
 
 
