@@ -5,6 +5,7 @@ import os
 from dotenv import load_dotenv
 from chatbot import mainChatBot
 from recommendation import recommendGifts
+from constants import desc, gifts
 
 model = genai.GenerativeModel('gemini-1.5-flash')
 api_key = os.getenv('GOOGLE_API_KEY')
@@ -14,9 +15,10 @@ app = Flask(__name__)
 CORS(app)
 CORS(app, resources={
     r"/*": {  # Apply to all endpoints
-        "origins": "*",  # Allow all origins
+        "origins": "https://devfest-25-hackathon.vercel.app",  # Allow all origins
         "methods": ["GET", "POST", "OPTIONS"],  # Allow common methods
         "allow_headers": ["Content-Type", "Authorization"],  # Allow common headers
+        "supports_credentials" : True  # Allow cookies
     }
 })
 
@@ -52,6 +54,14 @@ def recommend():
 
     except Exception as e:
         return jsonify({"error": str(e)}), 500
+    
+
+@app.route('/getGifts', methods=['GET'])
+def getGifts():
+    return {
+        "gifts": gifts,
+        "desc": desc
+    }
     
 
 # if __name__ == '__main__':
