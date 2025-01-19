@@ -1,5 +1,6 @@
 from flask import Flask, request, jsonify, render_template
 import google.generativeai as genai
+from flask_cors import CORS
 import os
 from dotenv import load_dotenv
 from chatbot import mainChatBot
@@ -10,6 +11,14 @@ api_key = os.getenv('GOOGLE_API_KEY')
 genai.configure(api_key=api_key)
 model = genai.GenerativeModel('gemini-1.5-flash')
 app = Flask(__name__)
+CORS(app)
+CORS(app, resources={
+    r"/*": {  # Apply to all endpoints
+        "origins": "*",  # Allow all origins
+        "methods": ["GET", "POST", "OPTIONS"],  # Allow common methods
+        "allow_headers": ["Content-Type", "Authorization"],  # Allow common headers
+    }
+})
 
 
 
