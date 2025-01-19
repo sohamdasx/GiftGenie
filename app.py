@@ -5,6 +5,7 @@ import os
 from dotenv import load_dotenv
 from chatbot import mainChatBot
 from recommendation import recommendGifts
+from constants import desc, gifts
 
 model = genai.GenerativeModel('gemini-1.5-flash')
 api_key = os.getenv('GOOGLE_API_KEY')
@@ -53,6 +54,14 @@ def recommend():
 
     except Exception as e:
         return jsonify({"error": str(e)}), 500
+    
+
+@app.route('/getGifts', methods=['GET'])
+def getGifts():
+    return {
+        "gifts": gifts,
+        "desc": desc
+    }
     
 
 # if __name__ == '__main__':
